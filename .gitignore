@@ -23,6 +23,7 @@ coverage
 
 # Build Outputs
 .next/
+.swc/
 out/
 build
 dist
@@ -36,3 +37,6 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+# expo
+.expo
