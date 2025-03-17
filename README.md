@@ -127,6 +127,21 @@ pnpm install convex --recursive --filter=@packages/backend
 | u/d | Scroll logs up and down |
 
 
+### Required Convex Env Variables
+Set these inside the convex under project settings
+
+```bash
+#auth
+JWKS=
+JWT_PRIVATE_KEY=
+SITE_URL=
+
+# oauth
+AUTH_GOOGLE_ID=
+AUTH_GOOGLE_SECRET=
+AUTH_RESEND_KEY=
+```
+
 # What is Convex?
 
 [Convex](https://convex.dev) is a hosted backend platform with a built-in
