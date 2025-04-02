@@ -14,7 +14,9 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as publicIndexImport } from './routes/(public)/index'
 import { Route as authLoginImport } from './routes/(auth)/login'
 import { Route as protectedDashboardRouteImport } from './routes/(protected)/dashboard/route'
+import { Route as protectedAdminRouteImport } from './routes/(protected)/admin/route'
 import { Route as protectedDashboardIndexImport } from './routes/(protected)/dashboard/index'
+import { Route as protectedAdminIndexImport } from './routes/(protected)/admin/index'
 
 // Create/Update Routes
 
@@ -36,16 +38,35 @@ const protectedDashboardRouteRoute = protectedDashboardRouteImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const protectedAdminRouteRoute = protectedAdminRouteImport.update({
+  id: '/(protected)/admin',
+  path: '/admin',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const protectedDashboardIndexRoute = protectedDashboardIndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => protectedDashboardRouteRoute,
 } as any)
 
+const protectedAdminIndexRoute = protectedAdminIndexImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => protectedAdminRouteRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/(protected)/admin': {
+      id: '/(protected)/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof protectedAdminRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/(protected)/dashboard': {
       id: '/(protected)/dashboard'
       path: '/dashboard'
@@ -67,6 +88,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicIndexImport
       parentRoute: typeof rootRoute
     }
+    '/(protected)/admin/': {
+      id: '/(protected)/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof protectedAdminIndexImport
+      parentRoute: typeof protectedAdminRouteImport
+    }
     '/(protected)/dashboard/': {
       id: '/(protected)/dashboard/'
       path: '/'
@@ -78,6 +106,17 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface protectedAdminRouteRouteChildren {
+  protectedAdminIndexRoute: typeof protectedAdminIndexRoute
+}
+
+const protectedAdminRouteRouteChildren: protectedAdminRouteRouteChildren = {
+  protectedAdminIndexRoute: protectedAdminIndexRoute,
+}
+
+const protectedAdminRouteRouteWithChildren =
+  protectedAdminRouteRoute._addFileChildren(protectedAdminRouteRouteChildren)
 
 interface protectedDashboardRouteRouteChildren {
   protectedDashboardIndexRoute: typeof protectedDashboardIndexRoute
@@ -94,47 +133,62 @@ const protectedDashboardRouteRouteWithChildren =
   )
 
 export interface FileRoutesByFullPath {
+  '/admin': typeof protectedAdminRouteRouteWithChildren
   '/dashboard': typeof protectedDashboardRouteRouteWithChildren
   '/login': typeof authLoginRoute
   '/': typeof publicIndexRoute
+  '/admin/': typeof protectedAdminIndexRoute
   '/dashboard/': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/login': typeof authLoginRoute
   '/': typeof publicIndexRoute
+  '/admin': typeof protectedAdminIndexRoute
   '/dashboard': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/(protected)/admin': typeof protectedAdminRouteRouteWithChildren
   '/(protected)/dashboard': typeof protectedDashboardRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
   '/(public)/': typeof publicIndexRoute
+  '/(protected)/admin/': typeof protectedAdminIndexRoute
   '/(protected)/dashboard/': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/dashboard' | '/login' | '/' | '/dashboard/'
+  fullPaths:
+    | '/admin'
+    | '/dashboard'
+    | '/login'
+    | '/'
+    | '/admin/'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/' | '/dashboard'
+  to: '/login' | '/' | '/admin' | '/dashboard'
   id:
     | '__root__'
+    | '/(protected)/admin'
     | '/(protected)/dashboard'
     | '/(auth)/login'
     | '/(public)/'
+    | '/(protected)/admin/'
     | '/(protected)/dashboard/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
+  protectedAdminRouteRoute: typeof protectedAdminRouteRouteWithChildren
   protectedDashboardRouteRoute: typeof protectedDashboardRouteRouteWithChildren
   authLoginRoute: typeof authLoginRoute
   publicIndexRoute: typeof publicIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  protectedAdminRouteRoute: protectedAdminRouteRouteWithChildren,
   protectedDashboardRouteRoute: protectedDashboardRouteRouteWithChildren,
   authLoginRoute: authLoginRoute,
   publicIndexRoute: publicIndexRoute,
@@ -150,9 +204,16 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/(protected)/admin",
         "/(protected)/dashboard",
         "/(auth)/login",
         "/(public)/"
+      ]
+    },
+    "/(protected)/admin": {
+      "filePath": "(protected)/admin/route.tsx",
+      "children": [
+        "/(protected)/admin/"
       ]
     },
     "/(protected)/dashboard": {
@@ -166,6 +227,10 @@ export const routeTree = rootRoute
     },
     "/(public)/": {
       "filePath": "(public)/index.tsx"
+    },
+    "/(protected)/admin/": {
+      "filePath": "(protected)/admin/index.tsx",
+      "parent": "/(protected)/admin"
     },
     "/(protected)/dashboard/": {
       "filePath": "(protected)/dashboard/index.tsx",

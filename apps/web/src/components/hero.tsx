@@ -2,7 +2,13 @@ import { Button } from "@/components/ui/button";
 import { images, site } from "@/lib/utils";
 import { Link } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
-import { CreditCard, Loader2, TrendingUp, Users } from "lucide-react";
+import {
+  ChevronRight,
+  CreditCard,
+  Loader2,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 
 const features = [
   {
@@ -28,7 +34,7 @@ export function Hero() {
       {/* Gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-primary/10 to-transparent dark:from-primary/10 dark:via-primary/15 dark:to-background" />
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left content */}
           <div className="max-w-2xl pt-20">
@@ -63,7 +69,10 @@ export function Hero() {
 
               <Authenticated>
                 <Button asChild size="lg">
-                  <Link to="/dashboard">Go to Dashboard</Link>
+                  <Link to="/dashboard">
+                    Go to Dashboard
+                    <ChevronRight className="size-4" />
+                  </Link>
                 </Button>
               </Authenticated>
             </div>
