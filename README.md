@@ -158,6 +158,13 @@ turbo run build --filter web
 After deploying your convex app to prod, remember to update the `env` variables
 [Follow this Going-Live link for Convex](https://labs.convex.dev/auth/setup/manual)
 
+For convex, you can simply run 
+```bash
+npx @convex-dev/auth --prod
+```
+
+#### --OR--
+
 1. Generate the convex keys required. Navigate to the backend folder or [This link for Netlify](https://docs.convex.dev/production/hosting/netlify)
     ```bash
     cd packages/backend
@@ -174,6 +181,12 @@ After deploying your convex app to prod, remember to update the `env` variables
   - Callback URL: `[HTTP Actions URL]/api/auth/callback/github`
   - Copy the Client ID value from the GitHub page: `AUTH_GITHUB_ID`
   - Copy the Client Secret value from the GitHub page: `AUTH_GITHUB_SECRET`
+4. Deploy convex
+  Run the following in your terminal
+  ```bash
+  cd packages/backend
+  npx convex deploy
+  ```
 
 # What is Convex?
 
