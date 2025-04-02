@@ -1,9 +1,9 @@
-import { createFileRoute, Navigate } from "@tanstack/react-router";
-import { useAuthActions } from "@convex-dev/auth/react";
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { useAuthActions } from "@convex-dev/auth/react";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
+import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
 import { Loader2 } from "lucide-react";
-import { useCurrentUser } from "@/hooks/use-current-user";
+import { useState } from "react";
 
 interface EmailSignInProps {
   onBack: () => void;
@@ -154,15 +154,6 @@ function Page() {
   const { signIn } = useAuthActions();
   const [showEmailSignIn, setShowEmailSignIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const { currentUser, isLoading: isLoadingAuthState } = useCurrentUser();
-
-  if (currentUser) {
-    return <Navigate to="/dashboard" />;
-  }
-
-  if (isLoadingAuthState) {
-    return <div>Loading...</div>;
-  }
 
   const handleGoogleSignIn = async () => {
     setIsLoading(true);
@@ -179,39 +170,51 @@ function Page() {
 
   return (
     <div className="max-w-md mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-center">Sign In</h1>
-
-      {showEmailSignIn ? (
-        <EmailSignIn
-          onBack={() => setShowEmailSignIn(false)}
-          isLoading={isLoading}
-          setIsLoading={setIsLoading}
-        />
-      ) : (
-        <div className="space-y-4">
-          <Button
-            onClick={handleGoogleSignIn}
-            variant="destructive"
-            disabled={isLoading}
-            className="w-full"
-          >
-            {isLoading ? (
-              <Loader2 className="animate-spin" />
-            ) : (
-              "Sign in with Google"
-            )}
-          </Button>
-
-          <Button
-            onClick={() => setShowEmailSignIn(true)}
-            variant="outline"
-            disabled={isLoading}
-            className="w-full"
-          >
-            Sign in with Email
-          </Button>
+      <AuthLoading>
+        <div className="flex w-full h-full justify-center items-center">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <p className="ml-2">Loading...</p>
         </div>
-      )}
+      </AuthLoading>
+
+      <Unauthenticated>
+        <h1 className="text-2xl font-bold text-center">Sign In</h1>
+        {showEmailSignIn ? (
+          <EmailSignIn
+            onBack={() => setShowEmailSignIn(false)}
+            isLoading={isLoading}
+            setIsLoading={setIsLoading}
+          />
+        ) : (
+          <div className="space-y-4">
+            <Button
+              onClick={handleGoogleSignIn}
+              variant="destructive"
+              disabled={isLoading}
+              className="w-full"
+            >
+              {isLoading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Sign in with Google"
+              )}
+            </Button>
+
+            <Button
+              onClick={() => setShowEmailSignIn(true)}
+              variant="outline"
+              disabled={isLoading}
+              className="w-full"
+            >
+              Sign in with Email
+            </Button>
+          </div>
+        )}
+      </Unauthenticated>
+
+      <Authenticated>
+        <Navigate to="/dashboard" />
+      </Authenticated>
     </div>
   );
 }

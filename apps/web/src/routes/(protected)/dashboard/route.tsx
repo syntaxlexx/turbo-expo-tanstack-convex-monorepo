@@ -1,22 +1,28 @@
-import { api } from "@packages/backend/convex/_generated/api";
 import { createFileRoute, Navigate, Outlet } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
+import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
+import { Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/(protected)/dashboard")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const currentUser = useQuery(api.users.currentUser);
-
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
-
   return (
-    <div>
-      <h3>Dashboard Layout</h3>
-      <Outlet />
+    <div className="container mx-auto py-8">
+      <AuthLoading>
+        <div className="flex w-full h-full justify-center items-center">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <p className="ml-2">Loading...</p>
+        </div>
+      </AuthLoading>
+
+      <Unauthenticated>
+        <Navigate to="/login" />
+      </Unauthenticated>
+
+      <Authenticated>
+        <Outlet />
+      </Authenticated>
     </div>
   );
 }
