@@ -10,7 +10,7 @@ function Page() {
   const { currentUser } = useCurrentUser();
 
   return (
-    <div>
+    <div className="pt-8">
       <h3>Dashboard</h3>
       {currentUser ? (
         <div>
@@ -24,7 +24,7 @@ function Page() {
 
       <div className="h-10">---</div>
       <Button asChild>
-        <Link to="/">Home</Link>
+        <Link to="/">Back Home</Link>
       </Button>
     </div>
   );

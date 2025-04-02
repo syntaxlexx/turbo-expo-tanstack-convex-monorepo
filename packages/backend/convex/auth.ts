@@ -16,7 +16,7 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
           name: githubProfile.name,
           email: githubProfile.email,
           image: githubProfile.picture as string | null,
-          githubId: githubProfile.id,
+          githubId: String(githubProfile.id),
         };
       },
     }),

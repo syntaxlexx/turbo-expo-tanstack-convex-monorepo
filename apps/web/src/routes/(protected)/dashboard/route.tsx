@@ -8,7 +8,7 @@ export const Route = createFileRoute("/(protected)/dashboard")({
 
 function RouteComponent() {
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto pt-16 pb-8">
       <AuthLoading>
         <div className="flex w-full h-full justify-center items-center">
           <Loader2 className="h-4 w-4 animate-spin" />
