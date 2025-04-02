@@ -1,0 +1,14 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+    # Component Naming
+    ## Description
+    Enforce that all component files use kebab-case (e.g., `my-component.tsx`).
+
+    ## Rules
+    - All component files in the `apps/web` folder  must be named using kebab-case.
+    - When creating a new component file, ensure the filename uses kebab-case.
+    - When renaming a component file, ensure the new filename uses kebab-case.
+    - If a component file is not named in kebab-case, suggest renaming it.
