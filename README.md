@@ -147,6 +147,8 @@ AUTH_RESEND_KEY=
 ## Going Live
 For deploying the web app, it would be best to use hosted solutions such as [Netlify](https://netlify.com), [Vercel](https://vercel.com)
 
+Ensure the app compiles first
+
 ```bash
 turbo run build --filter web
 ```
@@ -171,6 +173,7 @@ After deploying your convex app to prod, remember to update the `env` variables
   Head over to GitHub developer settings and create a new GitHub app.
   - Callback URL: `[HTTP Actions URL]/api/auth/callback/github`
   - Copy the Client ID value from the GitHub page: `AUTH_GITHUB_ID`
+  - Copy the Client Secret value from the GitHub page: `AUTH_GITHUB_SECRET`
 
 # What is Convex?
 
