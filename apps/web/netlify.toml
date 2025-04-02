@@ -1,5 +1,5 @@
 [build]
-  publish = "dist"  # Or your build output directory
+  publish = "apps/web/dist"  # Or your build output directory
 
 [[redirects]]
   from = "/*"
