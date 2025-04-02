@@ -49,7 +49,7 @@ export const Route = createRootRoute({
           <div className="fixed top-0 left-0 right-0 w-full z-10">
             <Header />
           </div>
-          <main className="min-h-[calc(100vh-8rem)]">
+          <main className="min-h-[calc(100vh-5rem)]">
             <Outlet />
           </main>
           <Footer />
