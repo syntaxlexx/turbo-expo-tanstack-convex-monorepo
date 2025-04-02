@@ -1,10 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
+import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
+import { Loader2 } from "lucide-react";
 
 export function Hero() {
   return (
     <div className="relative isolate overflow-hidden bg-white">
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+      <div className="lg:flex pb-24 pt-10 sm:pb-32 lg:px-8 lg:pb-40">
         <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8">
           <div className="mt-24 sm:mt-32 lg:mt-16">
             <a href="#" className="inline-flex space-x-6">
@@ -35,12 +37,29 @@ export function Hero() {
             stack. Powered by React, TanStack Router, and Convex.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
-            <Button asChild size="lg">
-              <Link to="/dashboard">Get started</Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/login">Sign in</Link>
-            </Button>
+            <AuthLoading>
+              <div className="flex items-center justify-center min-h-screen">
+                <Loader2 className="h-8 w-8 animate-spin" />
+              </div>
+            </AuthLoading>
+
+            <Unauthenticated>
+              <Button asChild size="lg">
+                <Link to="/dashboard">Get started</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/login">Sign in</Link>
+              </Button>
+            </Unauthenticated>
+
+            <Authenticated>
+              <div className="container mx-auto px-4 py-8">
+                <h1 className="text-3xl font-bold mb-4">Welcome back!</h1>
+                <Button asChild>
+                  <Link to="/dashboard">Go to Dashboard</Link>
+                </Button>
+              </div>
+            </Authenticated>
           </div>
         </div>
         <div className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">

@@ -1,11 +1,10 @@
-import { useCurrentUser } from "@/hooks/use-current-user";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { Link } from "@tanstack/react-router";
+import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 export default function Header() {
-  const { currentUser, isLoading: isLoadingAuthState } = useCurrentUser();
   const { signOut } = useAuthActions();
 
   return (
@@ -17,27 +16,25 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-2 items-center flex-row">
-        {isLoadingAuthState ? (
+        <AuthLoading>
           <Loader2 className="animate-spin" />
-        ) : (
-          <>
-            {currentUser ? (
-              <>
-                <Link to="/dashboard">
-                  <Button>Dashboard</Button>
-                </Link>
+        </AuthLoading>
 
-                <Button onClick={signOut} variant={"outline"}>
-                  Sign Out
-                </Button>
-              </>
-            ) : (
-              <div className="px-2 font-bold">
-                <Link to="/login">Login</Link>
-              </div>
-            )}
-          </>
-        )}
+        <Unauthenticated>
+          <Link to="/login">Login</Link>
+        </Unauthenticated>
+
+        <Authenticated>
+          <Link to="/dashboard">
+            <Button>Dashboard</Button>
+          </Link>
+
+          <Button onClick={signOut} variant={"outline"}>
+            Sign Out
+          </Button>
+        </Authenticated>
+
+        {/* theme toggler */}
       </div>
     </header>
   );

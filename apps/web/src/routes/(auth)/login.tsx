@@ -213,7 +213,7 @@ function Page() {
       </Unauthenticated>
 
       <Authenticated>
-        <Navigate to="/dashboard" />
+        <Navigate to="/dashboard" replace />
       </Authenticated>
     </div>
   );

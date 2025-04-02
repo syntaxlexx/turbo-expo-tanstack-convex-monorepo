@@ -17,7 +17,7 @@ function RouteComponent() {
       </AuthLoading>
 
       <Unauthenticated>
-        <Navigate to="/login" />
+        <Navigate to="/login" replace />
       </Unauthenticated>
 
       <Authenticated>
