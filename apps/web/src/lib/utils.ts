@@ -12,7 +12,7 @@ export const site = {
     "KopaKopa is a Platform for Financial Planning, Tracking, and Literacy",
   logo: "/logo.png",
   phone: undefined,
-  email: "loans@acelords.com",
+  email: "kopakopa@apps.acelords.com",
   links: {
     twitter: undefined,
     github: undefined,

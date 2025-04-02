@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
@@ -207,18 +213,25 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
       {error && <div className="text-red-500 text-sm">{error}</div>}
 
       <form onSubmit={handleCodeSubmit} className="space-y-4">
-        <Input
+        <InputOTP
           value={code}
-          onChange={(e) => setCode(e.target.value)}
-          placeholder="Enter verification code"
-          type="text"
-          id="code"
-          autoCorrect="off"
-          autoComplete="off"
-          required
-          className="w-full"
-        />
-        <div className="flex gap-2 items-center">
+          onChange={setCode}
+          maxLength={6}
+          className="w-full justify-center"
+        >
+          <InputOTPGroup>
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+          </InputOTPGroup>
+          <InputOTPSeparator />
+          <InputOTPGroup>
+            <InputOTPSlot index={3} />
+            <InputOTPSlot index={4} />
+            <InputOTPSlot index={5} />
+          </InputOTPGroup>
+        </InputOTP>
+        <div className="flex gap-2 items-center justify-center">
           <Button type="submit" disabled={isLoading || !code.trim()}>
             {isLoading ? <Loader2 className="animate-spin" /> : "Verify"}
           </Button>

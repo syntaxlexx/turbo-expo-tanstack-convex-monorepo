@@ -14,3 +14,14 @@ export function deploymentName() {
   const regex = new RegExp("https://(.+).convex.cloud");
   return regex.exec(url)?.[1];
 }
+
+export const site = {
+  name: "KopaKopa",
+  slogan: "Empower Your Finances!",
+  description:
+    "KopaKopa is a Platform for Financial Planning, Tracking, and Literacy",
+  logo: "/logo.png",
+  phone: undefined,
+  email: "loans@acelords.com",
+  emailFrom: "kopakopa@apps.acelords.com",
+};

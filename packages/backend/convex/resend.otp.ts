@@ -2,6 +2,7 @@ import { Email } from "@convex-dev/auth/providers/Email";
 import { Resend as ResendAPI } from "resend";
 import { generateRandomString } from "@oslojs/crypto/random";
 import type { RandomReader } from "@oslojs/crypto/random";
+import { site } from "./utils";
 
 const alphabet = "123456789";
 const random: RandomReader = {
@@ -20,10 +21,10 @@ export const ResendOTP = Email({
   async sendVerificationRequest({ identifier: email, provider, token }) {
     const resend = new ResendAPI(provider.apiKey);
     const { error } = await resend.emails.send({
-      from: "My App <onboarding@resend.acelords.com>",
+      from: `"${site.name}" <${site.emailFrom}>`,
       to: [email],
-      subject: `Sign in to My App`,
-      text: "Your code is " + token,
+      subject: `Sign in to ${site.name}`,
+      text: `Your code is ${token}`,
     });
 
     if (error) {

@@ -24,6 +24,7 @@
     "clsx": "^2.1.1",
     "convex": "^1.20.0",
     "framer-motion": "^12.6.3",
+    "input-otp": "^1.4.2",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
