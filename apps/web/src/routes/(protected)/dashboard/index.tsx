@@ -22,7 +22,9 @@ function Page() {
     <div>
       <h3>Dashboard</h3>
       {currentUser ? (
-        <div>User: {currentUser.email}</div>
+        <div>
+          User: {currentUser.email}. Role: {currentUser.role}
+        </div>
       ) : (
         <div>
           <p>Unauthenticated server-side</p>

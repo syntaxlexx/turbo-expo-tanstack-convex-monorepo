@@ -14,6 +14,7 @@ export default defineSchema({
     phoneVerificationTime: v.optional(v.number()),
     isAnonymous: v.optional(v.boolean()),
     // other "users" fields...
+    role: v.optional(v.union(v.literal("admin"), v.literal("user"))),
   }).index("email", ["email"]),
 
   notes: defineTable({
@@ -21,5 +22,5 @@ export default defineSchema({
     title: v.string(),
     content: v.string(),
     summary: v.optional(v.string()),
-  }),
+  }).index("userId", ["userId"]),
 });
