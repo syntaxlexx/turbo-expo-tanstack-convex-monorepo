@@ -20,6 +20,7 @@ function Page() {
 
   return (
     <div>
+      <h3>Dashboard</h3>
       {currentUser ? (
         <div>User: {currentUser.email}</div>
       ) : (

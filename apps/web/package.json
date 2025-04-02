@@ -14,8 +14,9 @@
     "@packages/backend": "workspace:*",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.6",
-    "@tanstack/react-router": "^1.114.3",
+    "@tanstack/react-router": "^1.114.23",
     "@tanstack/react-router-devtools": "^1.114.3",
+    "@tanstack/react-start": "^1.114.23",
     "@tanstack/router-plugin": "^1.114.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -25,16 +26,17 @@
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.0.2",
     "tailwindcss": "^4.0.6",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "vinxi": "^0.5.3"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
     "@testing-library/react": "^16.2.0",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
-    "typescript": "^5.7.2",
+    "typescript": "^5.8.2",
     "vite": "^6.1.0",
     "vitest": "^3.0.5",
     "web-vitals": "^4.2.4"

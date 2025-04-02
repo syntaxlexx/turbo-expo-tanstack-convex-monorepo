@@ -1,7 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 
 export const Route = createFileRoute("/(auth)/login")({
   component: Page,
@@ -10,6 +12,16 @@ export const Route = createFileRoute("/(auth)/login")({
 function Page() {
   const { signIn } = useAuthActions();
   const [step, setStep] = useState<"signIn" | { email: string }>("signIn");
+  const [isLoading, setIsLoading] = useState(false);
+  const { currentUser, isLoading: isLoadingAuthState } = useCurrentUser();
+
+  if (currentUser) {
+    return <Navigate to="/dashboard" />;
+  }
+
+  if (isLoadingAuthState) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
@@ -30,20 +42,28 @@ function Page() {
         <form
           onSubmit={(event) => {
             event.preventDefault();
+            setIsLoading(true);
             const formData = new FormData(event.currentTarget);
             void signIn("resend-otp", formData).then(() =>
               setStep({ email: formData.get("email") as string }),
             );
+            setIsLoading(false);
           }}
         >
           <input name="email" placeholder="Email" type="text" />
-          <button type="submit">Send code</button>
+          <button type="submit" disabled={isLoading}>
+            Send code
+            {isLoading && <Loader2 className="animate-spin" />}
+          </button>
         </form>
       ) : (
         <form
           onSubmit={async (event) => {
             event.preventDefault();
             const formData = new FormData(event.currentTarget);
+            formData.set("redirectTo", "/dashboard");
+            setIsLoading(true);
+
             const { signingIn, redirect } = await signIn(
               "resend-otp",
               formData,
@@ -54,6 +74,7 @@ function Page() {
             if (redirect) {
               console.log("Redirecting...");
             }
+            setIsLoading(false);
           }}
         >
           <input
@@ -64,7 +85,10 @@ function Page() {
             autoComplete="off"
           />
           <input name="email" value={step.email} type="hidden" />
-          <button type="submit">Continue</button>
+          <button type="submit" disabled={isLoading}>
+            Continue
+            {isLoading && <Loader2 className="animate-spin" />}
+          </button>
           <button type="button" onClick={() => setStep("signIn")}>
             Cancel
           </button>

@@ -4,3 +4,7 @@ dist
 dist-ssr
 *.local
 # routes/routeTree.gen
+
+
+.env
+.env.local

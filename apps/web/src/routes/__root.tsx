@@ -3,7 +3,7 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
 
-import Header from "../components/Header";
+import Header from "@/components/header";
 
 const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
 
