@@ -151,6 +151,24 @@ For deploying the web app, it would be best to use hosted solutions such as [Net
 turbo run build --filter web
 ```
 
+> Deploy your convex site to Production
+
+After deploying your convex app to prod, remember to update the `env` variables
+[Follow this Going-Live link for Convex](https://labs.convex.dev/auth/setup/manual)
+
+1. Generate the convex keys required. Navigate to the backend folder
+    ```bash
+    cd packages/backend
+    node generateKeys.mjs
+    ```
+    This will generate a set of keys and store them in a `generatedKeys.txt` file.
+    It will generate 
+    - A JWT private key
+    - A JWKS (JSON Web Key Set) containing the public key
+    Copy-paste to your convex DB
+2. Provide other convex-related keys, e.g. `OPENAI_API_KEY` and `SITE_URL`. The `SITE_URL` can be copied from your **NEtlify/Vercel** dasboards
+3. 
+
 # What is Convex?
 
 [Convex](https://convex.dev) is a hosted backend platform with a built-in
