@@ -11,15 +11,15 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as IndexImport } from './routes/index'
+import { Route as publicIndexImport } from './routes/(public)/index'
 import { Route as authLoginImport } from './routes/(auth)/login'
 import { Route as protectedDashboardRouteImport } from './routes/(protected)/dashboard/route'
 import { Route as protectedDashboardIndexImport } from './routes/(protected)/dashboard/index'
 
 // Create/Update Routes
 
-const IndexRoute = IndexImport.update({
-  id: '/',
+const publicIndexRoute = publicIndexImport.update({
+  id: '/(public)/',
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
@@ -46,13 +46,6 @@ const protectedDashboardIndexRoute = protectedDashboardIndexImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/(protected)/dashboard': {
       id: '/(protected)/dashboard'
       path: '/dashboard'
@@ -65,6 +58,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof authLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/(public)/': {
+      id: '/(public)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof publicIndexImport
       parentRoute: typeof rootRoute
     }
     '/(protected)/dashboard/': {
@@ -94,50 +94,50 @@ const protectedDashboardRouteRouteWithChildren =
   )
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
   '/dashboard': typeof protectedDashboardRouteRouteWithChildren
   '/login': typeof authLoginRoute
+  '/': typeof publicIndexRoute
   '/dashboard/': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/login': typeof authLoginRoute
+  '/': typeof publicIndexRoute
   '/dashboard': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
-  '/': typeof IndexRoute
   '/(protected)/dashboard': typeof protectedDashboardRouteRouteWithChildren
   '/(auth)/login': typeof authLoginRoute
+  '/(public)/': typeof publicIndexRoute
   '/(protected)/dashboard/': typeof protectedDashboardIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/login' | '/dashboard/'
+  fullPaths: '/dashboard' | '/login' | '/' | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/dashboard'
+  to: '/login' | '/' | '/dashboard'
   id:
     | '__root__'
-    | '/'
     | '/(protected)/dashboard'
     | '/(auth)/login'
+    | '/(public)/'
     | '/(protected)/dashboard/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
   protectedDashboardRouteRoute: typeof protectedDashboardRouteRouteWithChildren
   authLoginRoute: typeof authLoginRoute
+  publicIndexRoute: typeof publicIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
   protectedDashboardRouteRoute: protectedDashboardRouteRouteWithChildren,
   authLoginRoute: authLoginRoute,
+  publicIndexRoute: publicIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -150,13 +150,10 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
         "/(protected)/dashboard",
-        "/(auth)/login"
+        "/(auth)/login",
+        "/(public)/"
       ]
-    },
-    "/": {
-      "filePath": "index.tsx"
     },
     "/(protected)/dashboard": {
       "filePath": "(protected)/dashboard/route.tsx",
@@ -166,6 +163,9 @@ export const routeTree = rootRoute
     },
     "/(auth)/login": {
       "filePath": "(auth)/login.tsx"
+    },
+    "/(public)/": {
+      "filePath": "(public)/index.tsx"
     },
     "/(protected)/dashboard/": {
       "filePath": "(protected)/dashboard/index.tsx",
