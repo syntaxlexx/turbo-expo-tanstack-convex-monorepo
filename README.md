@@ -167,7 +167,10 @@ After deploying your convex app to prod, remember to update the `env` variables
     - A JWKS (JSON Web Key Set) containing the public key
     Copy-paste to your convex DB
 2. Provide other convex-related keys, e.g. `OPENAI_API_KEY` and `SITE_URL`. The `SITE_URL` can be copied from your **NEtlify/Vercel** dasboards
-3. 
+3. Setup GitHub OAuth. 
+  Head over to GitHub developer settings and create a new GitHub app.
+  - Callback URL: `[HTTP Actions URL]/api/auth/callback/github`
+  - Copy the Client ID value from the GitHub page: `AUTH_GITHUB_ID`
 
 # What is Convex?
 

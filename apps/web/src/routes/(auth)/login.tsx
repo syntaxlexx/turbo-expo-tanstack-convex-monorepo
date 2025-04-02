@@ -11,6 +11,107 @@ interface EmailSignInProps {
   setIsLoading: (loading: boolean) => void;
 }
 
+export const Route = createFileRoute("/(auth)/login")({
+  component: Page,
+});
+
+function Page() {
+  const { signIn } = useAuthActions();
+  const [showEmailSignIn, setShowEmailSignIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleOAuthSignIn = async ({
+    provider,
+  }: {
+    provider: "google" | "github";
+  }) => {
+    setIsLoading(true);
+    try {
+      await signIn(provider, {
+        redirectTo: "/dashboard",
+      });
+    } catch (error) {
+      console.error(`${provider} sign-in error:`, error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex">
+      <AuthLoading>
+        <div className="flex w-full h-full justify-center items-center">
+          <Loader2 className="h-4 w-4 animate-spin" />
+          <p className="ml-2">Loading...</p>
+        </div>
+      </AuthLoading>
+
+      <Unauthenticated>
+        {/* Left side - Image */}
+        <div className="hidden lg:block lg:w-1/2 relative">
+          <div className="absolute inset-0 bg-black/20" />{" "}
+          {/* Overlay for better text contrast */}
+          <img
+            src="/images/login-bg.jpg"
+            alt="Nature background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 flex items-center justify-center p-8">
+            <div className="text-white text-center">
+              <h2 className="text-4xl font-bold mb-4">Welcome Back</h2>
+              <p className="text-lg">Sign in to continue your journey</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Right side - Login Form */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+          <div className="w-full max-w-md space-y-6">
+            <div className="lg:hidden text-center mb-8">
+              <h1 className="text-2xl font-bold">Sign In</h1>
+            </div>
+            {showEmailSignIn ? (
+              <EmailSignIn
+                onBack={() => setShowEmailSignIn(false)}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+            ) : (
+              <div className="space-y-4">
+                <Button
+                  onClick={() => handleOAuthSignIn({ provider: "github" })}
+                  variant="default"
+                  disabled={isLoading}
+                  className="w-full bg-[#24292e] hover:bg-[#1c2127] text-white"
+                >
+                  {isLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    "Sign in with GitHub"
+                  )}
+                </Button>
+
+                <Button
+                  onClick={() => setShowEmailSignIn(true)}
+                  variant="outline"
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  Sign in with Email
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+      </Unauthenticated>
+
+      <Authenticated>
+        <Navigate to="/dashboard" replace />
+      </Authenticated>
+    </div>
+  );
+}
+
 function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
   const { signIn } = useAuthActions();
   const [step, setStep] = useState<"email" | { type: "code"; email: string }>(
@@ -144,103 +245,6 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
           </button>
         </div>
       </form>
-    </div>
-  );
-}
-
-export const Route = createFileRoute("/(auth)/login")({
-  component: Page,
-});
-
-function Page() {
-  const { signIn } = useAuthActions();
-  const [showEmailSignIn, setShowEmailSignIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleGoogleSignIn = async () => {
-    setIsLoading(true);
-    try {
-      await signIn("google", {
-        redirectTo: "/dashboard",
-      });
-    } catch (error) {
-      console.error("Google sign-in error:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div className="min-h-screen flex">
-      <AuthLoading>
-        <div className="flex w-full h-full justify-center items-center">
-          <Loader2 className="h-4 w-4 animate-spin" />
-          <p className="ml-2">Loading...</p>
-        </div>
-      </AuthLoading>
-
-      <Unauthenticated>
-        {/* Left side - Image */}
-        <div className="hidden lg:block lg:w-1/2 relative">
-          <div className="absolute inset-0 bg-black/20" />{" "}
-          {/* Overlay for better text contrast */}
-          <img
-            src="/images/login-bg.jpg"
-            alt="Nature background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center p-8">
-            <div className="text-white text-center">
-              <h2 className="text-4xl font-bold mb-4">Welcome Back</h2>
-              <p className="text-lg">Sign in to continue your journey</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right side - Login Form */}
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
-          <div className="w-full max-w-md space-y-6">
-            <div className="lg:hidden text-center mb-8">
-              <h1 className="text-2xl font-bold">Sign In</h1>
-            </div>
-            {showEmailSignIn ? (
-              <EmailSignIn
-                onBack={() => setShowEmailSignIn(false)}
-                isLoading={isLoading}
-                setIsLoading={setIsLoading}
-              />
-            ) : (
-              <div className="space-y-4">
-                <Button
-                  onClick={handleGoogleSignIn}
-                  variant="destructive"
-                  disabled={isLoading}
-                  className="w-full"
-                >
-                  {isLoading ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    "Sign in with Google"
-                  )}
-                </Button>
-
-                <Button
-                  onClick={() => setShowEmailSignIn(true)}
-                  variant="outline"
-                  disabled={isLoading}
-                  className="w-full"
-                >
-                  Sign in with Email
-                </Button>
-              </div>
-            )}
-          </div>
-        </div>
-      </Unauthenticated>
-
-      <Authenticated>
-        <Navigate to="/dashboard" replace />
-      </Authenticated>
     </div>
   );
 }
