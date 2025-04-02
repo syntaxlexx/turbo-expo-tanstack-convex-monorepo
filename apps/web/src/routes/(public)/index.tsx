@@ -1,5 +1,4 @@
-import { Footer } from "@/components/Footer";
-import { Hero } from "@/components/Hero";
+import { Hero } from "@/components/hero";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/(public)/")({
@@ -14,8 +13,6 @@ function App() {
           <Hero />
         </div>
       </main>
-
-      <Footer />
     </div>
   );
 }

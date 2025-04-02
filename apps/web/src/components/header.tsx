@@ -1,12 +1,12 @@
+import { githubUrl } from "@/lib/utils";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { Link } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
-import { GithubIcon, Loader2 } from "lucide-react";
-import { Button } from "./ui/button";
-import { githubUrl } from "@/lib/utils";
+import { Loader2 } from "lucide-react";
 import { ThemeToggle } from "./theme-toggle";
+import { Button } from "./ui/button";
 
-export default function Header() {
+export function Header() {
   const { signOut } = useAuthActions();
 
   return (
