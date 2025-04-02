@@ -15,13 +15,5 @@ export default defineSchema({
     isAnonymous: v.optional(v.boolean()),
     // other "users" fields...
     role: v.optional(v.union(v.literal("admin"), v.literal("user"))),
-    githubId: v.optional(v.string()),
   }).index("email", ["email"]),
-
-  notes: defineTable({
-    userId: v.string(),
-    title: v.string(),
-    content: v.string(),
-    summary: v.optional(v.string()),
-  }).index("userId", ["userId"]),
 });

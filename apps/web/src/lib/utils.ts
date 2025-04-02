@@ -5,7 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const githubUrl =
-  "https://github.com/syntaxlexx/turbo-expo-tanstack-convex-monorepo";
-
-export const twitterUrl = "https://x.com/syntaxlexx";
+export const site = {
+  name: "KopaKopa",
+  description: "KopaKopa is a platform for financial planning and literacy",
+  logo: "/logo.png",
+  phone: undefined,
+  email: "loans@acelords.com",
+  links: {
+    twitter: undefined,
+    github: undefined,
+  },
+};
