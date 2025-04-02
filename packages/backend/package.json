@@ -13,6 +13,7 @@
     "@convex-dev/auth": "^0.0.81",
     "@oslojs/crypto": "^1.0.1",
     "convex": "^1.20.0",
+    "jose": "^6.0.10",
     "openai": "^4.87.3",
     "resend": "^4.1.2"
   },

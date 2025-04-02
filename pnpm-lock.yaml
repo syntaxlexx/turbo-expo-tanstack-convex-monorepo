@@ -129,6 +129,9 @@ importers:
       convex:
         specifier: ^1.20.0
         version: 1.20.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      jose:
+        specifier: ^6.0.10
+        version: 6.0.10
       openai:
         specifier: ^4.87.3
         version: 4.87.3(ws@8.18.1)(zod@3.24.2)
@@ -3048,6 +3051,9 @@ packages:
 
   jose@5.10.0:
     resolution: {integrity: sha512-s+3Al/p9g32Iq+oqXxkW//7jk2Vig6FF1CFqzVXoTUXt2qz89YWbL+OwS17NFYEvxC35n0FKeGO2LGYSxeM2Gg==}
+
+  jose@6.0.10:
+    resolution: {integrity: sha512-skIAxZqcMkOrSwjJvplIPYrlXGpxTPnro2/QWTDCxAdWQrSTV5/KqspMWmi5WAx5+ULswASJiZ0a+1B/Lxt9cw==}
 
   js-beautify@1.15.4:
     resolution: {integrity: sha512-9/KXeZUKKJwqCXUdBxFJ3vPh467OCckSBmYDwSK/EtV090K+iMJ7zx2S3HLVDIWFQdqMIsZWbnaGiba18aWhaA==}
@@ -7542,6 +7548,8 @@ snapshots:
   jiti@2.4.2: {}
 
   jose@5.10.0: {}
+
+  jose@6.0.10: {}
 
   js-beautify@1.15.4:
     dependencies:
