@@ -7,3 +7,5 @@ export function cn(...inputs: ClassValue[]) {
 
 export const githubUrl =
   "https://github.com/syntaxlexx/turbo-expo-tanstack-convex-monorepo";
+
+export const twitterUrl = "https://x.com/syntaxlexx";

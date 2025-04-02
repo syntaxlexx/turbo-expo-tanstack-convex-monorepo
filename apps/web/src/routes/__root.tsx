@@ -2,6 +2,7 @@ import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { ConvexAuthProvider } from "@convex-dev/auth/react";
 import { ConvexReactClient } from "convex/react";
+import { ThemeProvider } from "@/components/theme-provider";
 
 import Header from "@/components/header";
 
@@ -41,11 +42,12 @@ export const Route = createRootRoute({
     ],
   }),
   component: () => (
-    <ConvexAuthProvider client={convex}>
-      <Header />
-
-      <Outlet />
-      <TanStackRouterDevtools position="bottom-right" />
-    </ConvexAuthProvider>
+    <ThemeProvider defaultTheme="system" storageKey="app-theme">
+      <ConvexAuthProvider client={convex}>
+        <Header />
+        <Outlet />
+        <TanStackRouterDevtools position="bottom-right" />
+      </ConvexAuthProvider>
+    </ThemeProvider>
   ),
 });
