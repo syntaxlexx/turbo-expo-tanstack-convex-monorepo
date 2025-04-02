@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
@@ -23,7 +24,7 @@ function Page() {
   const handleOAuthSignIn = async ({
     provider,
   }: {
-    provider: "google" | "github";
+    provider: "google" | "facebook";
   }) => {
     setIsLoading(true);
     try {
@@ -79,15 +80,15 @@ function Page() {
             ) : (
               <div className="space-y-4">
                 <Button
-                  onClick={() => handleOAuthSignIn({ provider: "github" })}
+                  onClick={() => handleOAuthSignIn({ provider: "google" })}
                   variant="default"
                   disabled={isLoading}
-                  className="w-full bg-[#24292e] hover:bg-[#1c2127] text-white"
+                  className="w-full bg-[#EA4335] hover:bg-[#D33A2C] text-white"
                 >
                   {isLoading ? (
                     <Loader2 className="animate-spin" />
                   ) : (
-                    "Sign in with GitHub"
+                    "Sign in with Google"
                   )}
                 </Button>
 
@@ -177,31 +178,24 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
       <div className="space-y-4">
         {error && <div className="text-red-500 text-sm">{error}</div>}
         <form onSubmit={handleEmailSubmit} className="space-y-4">
-          <input
+          <Input
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             type="email"
             id="email"
             required
-            className="w-full p-2 border rounded"
+            className="w-full"
           />
-          <div className="space-x-2">
-            <button
-              type="submit"
-              disabled={isLoading || !email.trim()}
-              className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-            >
+          <div className="flex gap-2 items-center">
+            <Button type="submit" disabled={isLoading || !email.trim()}>
               {isLoading ? <Loader2 className="animate-spin" /> : "Send code"}
-            </button>
-            <button
-              type="button"
-              onClick={onBack}
-              className="px-4 py-2 border rounded inline-flex items-center"
-            >
+            </Button>
+
+            <Button type="button" onClick={onBack} variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
-            </button>
+            </Button>
           </div>
         </form>
       </div>
@@ -213,7 +207,7 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
       {error && <div className="text-red-500 text-sm">{error}</div>}
 
       <form onSubmit={handleCodeSubmit} className="space-y-4">
-        <input
+        <Input
           value={code}
           onChange={(e) => setCode(e.target.value)}
           placeholder="Enter verification code"
@@ -222,27 +216,23 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
           autoCorrect="off"
           autoComplete="off"
           required
-          className="w-full p-2 border rounded"
+          className="w-full"
         />
-        <div className="space-x-2">
-          <button
-            type="submit"
-            disabled={isLoading || !code.trim()}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50"
-          >
+        <div className="flex gap-2 items-center">
+          <Button type="submit" disabled={isLoading || !code.trim()}>
             {isLoading ? <Loader2 className="animate-spin" /> : "Verify"}
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             onClick={() => {
               setCode("");
               setStep("email");
             }}
-            className="px-4 py-2 border rounded inline-flex items-center"
+            variant="outline"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
+            <ArrowLeft className="size-4 mr-2" />
             Back
-          </button>
+          </Button>
         </div>
       </form>
     </div>
