@@ -1,14 +1,13 @@
 import { Button } from "@/components/ui/button";
-import { api } from "@packages/backend/convex/_generated/api";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useQuery } from "convex/react";
 
 export const Route = createFileRoute("/(protected)/dashboard/")({
   component: Page,
 });
 
 function Page() {
-  const currentUser = useQuery(api.users.currentUser);
+  const { currentUser } = useCurrentUser();
 
   return (
     <div>

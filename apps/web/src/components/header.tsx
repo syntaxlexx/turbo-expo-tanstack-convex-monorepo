@@ -21,7 +21,9 @@ export default function Header() {
         </AuthLoading>
 
         <Unauthenticated>
-          <Link to="/login">Login</Link>
+          <Link to="/login">
+            <Button>Sign In</Button>
+          </Link>
         </Unauthenticated>
 
         <Authenticated>
