@@ -1,13 +1,21 @@
 import { Email } from "@convex-dev/auth/providers/Email";
 import { Resend as ResendAPI } from "resend";
-import { alphabet, generateRandomString } from "oslo/crypto";
+import { generateRandomString } from "@oslojs/crypto/random";
+import type { RandomReader } from "@oslojs/crypto/random";
+
+const alphabet = "123456789";
+const random: RandomReader = {
+  read(bytes: Uint8Array): void {
+    crypto.getRandomValues(bytes);
+  },
+};
 
 export const ResendOTP = Email({
   id: "resend-otp",
   apiKey: process.env.AUTH_RESEND_KEY,
   maxAge: 60 * 15, // 15 minutes
   async generateVerificationToken() {
-    return generateRandomString(8, alphabet("0-9"));
+    return generateRandomString(random, alphabet, 6);
   },
   async sendVerificationRequest({ identifier: email, provider, token }) {
     const resend = new ResendAPI(provider.apiKey);

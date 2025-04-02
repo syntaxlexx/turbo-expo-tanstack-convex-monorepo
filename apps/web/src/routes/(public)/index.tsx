@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="container mx-auto">
-        <div className="mb-4 md:mb-8 lg:mb-12 min-h-[calc(100vh-8rem)]">
+        <div className="mb-4 md:mb-8 lg:mb-12">
           <Hero />
         </div>
       </main>

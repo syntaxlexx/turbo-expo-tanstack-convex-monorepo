@@ -46,7 +46,9 @@ export const Route = createRootRoute({
     <ThemeProvider defaultTheme="system" storageKey="app-theme">
       <ConvexAuthProvider client={convex}>
         <Header />
-        <Outlet />
+        <main className="min-h-[calc(100vh-8rem)]">
+          <Outlet />
+        </main>
         <Footer />
         <TanStackRouterDevtools position="bottom-right" />
       </ConvexAuthProvider>

@@ -28,6 +28,10 @@ export function Hero() {
             Build beautiful, responsive web applications with our modern tech
             stack. Powered by React, TanStack Router, and Convex.
           </p>
+          <Authenticated>
+            <h1 className="text-3xl font-bold mb-4">Welcome back!</h1>
+          </Authenticated>
+
           <div className="mt-10 flex items-center gap-x-6">
             <Button asChild size="lg">
               <a href={githubUrl}>Get started</a>
@@ -46,12 +50,12 @@ export function Hero() {
             </Unauthenticated>
 
             <Authenticated>
-              <div className="container mx-auto px-4 py-8">
-                <h1 className="text-3xl font-bold mb-4">Welcome back!</h1>
-                <Button asChild>
-                  <Link to="/dashboard">Go to Dashboard</Link>
-                </Button>
-              </div>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/dashboard">
+                  Go to Dashboard
+                  <ChevronRight className="size-4" />
+                </Link>
+              </Button>
             </Authenticated>
           </div>
         </div>

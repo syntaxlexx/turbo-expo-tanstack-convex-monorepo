@@ -10,11 +10,10 @@
   "license": "ISC",
   "dependencies": {
     "@auth/core": "0.37.0",
-    "@convex-dev/auth": "^0.0.80",
+    "@convex-dev/auth": "^0.0.81",
     "@oslojs/crypto": "^1.0.1",
     "convex": "^1.20.0",
     "openai": "^4.87.3",
-    "oslo": "^1.2.1",
     "resend": "^4.1.2"
   },
   "devDependencies": {
