@@ -45,11 +45,15 @@ export const Route = createRootRoute({
   component: () => (
     <ThemeProvider defaultTheme="system" storageKey="app-theme">
       <ConvexAuthProvider client={convex}>
-        <Header />
-        <main className="min-h-[calc(100vh-8rem)]">
-          <Outlet />
-        </main>
-        <Footer />
+        <div className="relative">
+          <div className="fixed top-0 left-0 right-0 w-full z-10">
+            <Header />
+          </div>
+          <main className="min-h-[calc(100vh-8rem)]">
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
         <TanStackRouterDevtools position="bottom-right" />
       </ConvexAuthProvider>
     </ThemeProvider>

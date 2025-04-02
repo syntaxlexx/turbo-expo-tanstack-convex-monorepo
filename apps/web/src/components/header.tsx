@@ -10,7 +10,7 @@ export function Header() {
   const { signOut } = useAuthActions();
 
   return (
-    <header className="w-full py-3 shadow bg-background  text-foreground border-b border-transparent dark:border-gray-700">
+    <header className="w-full py-3 shadow text-foreground border-b border-transparent dark:border-gray-700 bg-background/40 backdrop-blur-sm">
       <div className="container mx-auto justify-between flex gap-2 items-center">
         <nav className="flex gap-2 items-center flex-row">
           <div className="px-2 font-bold">
