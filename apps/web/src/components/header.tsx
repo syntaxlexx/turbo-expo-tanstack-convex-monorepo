@@ -1,8 +1,9 @@
 import { useAuthActions } from "@convex-dev/auth/react";
 import { Link } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
-import { Loader2 } from "lucide-react";
+import { GithubIcon, Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
+import { githubUrl } from "@/lib/utils";
 
 export default function Header() {
   const { signOut } = useAuthActions();
@@ -16,6 +17,13 @@ export default function Header() {
       </nav>
 
       <div className="flex gap-2 items-center flex-row">
+        <a href={githubUrl}>
+          <Button variant={"outline"}>
+            <GithubIcon className="size-4" />
+            Github
+          </Button>
+        </a>
+
         <AuthLoading>
           <Loader2 className="animate-spin" />
         </AuthLoading>

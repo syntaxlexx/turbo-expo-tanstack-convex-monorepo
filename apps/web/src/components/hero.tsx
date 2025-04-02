@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
 import { ChevronRight, Loader2 } from "lucide-react";
 import HeroScene from "./hero-scene";
+import { githubUrl } from "@/lib/utils";
 
 export function Hero() {
   return (
@@ -10,10 +11,7 @@ export function Hero() {
       <div className="grid lg:grid-cols-2 gap-8 ">
         <div className=" max-w-2xl lg:mx-0 lg:max-w-xl lg:pt-8">
           <div className="mt-6 sm:mt-12 lg:mt-16">
-            <a
-              href="https://github.com/syntaxlexx/"
-              className="inline-flex space-x-6"
-            >
+            <a href={githubUrl} className="inline-flex space-x-6">
               <span className="rounded-full bg-indigo-600/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-600 ring-1 ring-inset ring-indigo-600/10">
                 What's new
               </span>
@@ -31,6 +29,10 @@ export function Hero() {
             stack. Powered by React, TanStack Router, and Convex.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
+            <Button asChild size="lg">
+              <a href={githubUrl}>Get started</a>
+            </Button>
+
             <AuthLoading>
               <div className="flex items-center justify-center min-h-screen">
                 <Loader2 className="h-8 w-8 animate-spin" />
@@ -38,9 +40,6 @@ export function Hero() {
             </AuthLoading>
 
             <Unauthenticated>
-              <Button asChild size="lg">
-                <Link to="/dashboard">Get started</Link>
-              </Button>
               <Button asChild variant="outline" size="lg">
                 <Link to="/login">Sign in</Link>
               </Button>
