@@ -7,7 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export const site = {
   name: "KopaKopa",
-  description: "KopaKopa is a platform for financial planning and literacy",
+  slogan: "Empower Your Finances!",
+  description:
+    "KopaKopa is a Platform for Financial Planning, Tracking, and Literacy",
   logo: "/logo.png",
   phone: undefined,
   email: "loans@acelords.com",
@@ -15,4 +17,11 @@ export const site = {
     twitter: undefined,
     github: undefined,
   },
+};
+
+export const images = {
+  mpesaLogo:
+    "https://u2hvyvc0j4.ufs.sh/f/InRyQ50mbzvEZQUL73HeMIFPqBm135Eg7HQLOwdc2RzYv4UD",
+  lipaNaMpesa:
+    "https://u2hvyvc0j4.ufs.sh/f/InRyQ50mbzvEaxdsswjrEqJHRIOCK7g4db3jYk2ftTUvA9MD",
 };

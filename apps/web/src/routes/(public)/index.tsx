@@ -8,7 +8,7 @@ export const Route = createFileRoute("/(public)/")({
 function App() {
   return (
     <div className="min-h-screen flex flex-col">
-      <main className="container mx-auto">
+      <main className="">
         <div className="mb-4 md:mb-8 lg:mb-12">
           <Hero />
         </div>
