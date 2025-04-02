@@ -1,5 +1,7 @@
 # Fullstack monorepo template feat. Expo (App Router), Turbo, TanStack, Convex
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/69bccfec-576e-402c-878c-c6446bbfe6e2/deploy-status)](https://app.netlify.com/sites/turbomonorepoconvex/deploys)
+
 This is a modern TypeScript monorepo template with AI web and native apps
 featuring:
 
@@ -140,6 +142,13 @@ SITE_URL=
 AUTH_GOOGLE_ID=
 AUTH_GOOGLE_SECRET=
 AUTH_RESEND_KEY=
+```
+
+## Going Live
+For deploying the web app, it would be best to use hosted solutions such as [Netlify](https://netlify.com), [Vercel](https://vercel.com)
+
+```bash
+turbo run build --filter web
 ```
 
 # What is Convex?
