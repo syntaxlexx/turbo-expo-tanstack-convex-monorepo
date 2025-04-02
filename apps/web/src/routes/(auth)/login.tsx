@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { Authenticated, AuthLoading, Unauthenticated } from "convex/react";
-import { Loader2 } from "lucide-react";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 interface EmailSignInProps {
@@ -96,8 +96,9 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
             <button
               type="button"
               onClick={onBack}
-              className="px-4 py-2 border rounded"
+              className="px-4 py-2 border rounded inline-flex items-center"
             >
+              <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </button>
           </div>
@@ -136,8 +137,9 @@ function EmailSignIn({ onBack, isLoading, setIsLoading }: EmailSignInProps) {
               setCode("");
               setStep("email");
             }}
-            className="px-4 py-2 border rounded"
+            className="px-4 py-2 border rounded inline-flex items-center"
           >
+            <ArrowLeft className="w-4 h-4 mr-2" />
             Back
           </button>
         </div>
@@ -169,7 +171,7 @@ function Page() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 space-y-6">
+    <div className="min-h-screen flex">
       <AuthLoading>
         <div className="flex w-full h-full justify-center items-center">
           <Loader2 className="h-4 w-4 animate-spin" />
@@ -178,38 +180,62 @@ function Page() {
       </AuthLoading>
 
       <Unauthenticated>
-        <h1 className="text-2xl font-bold text-center">Sign In</h1>
-        {showEmailSignIn ? (
-          <EmailSignIn
-            onBack={() => setShowEmailSignIn(false)}
-            isLoading={isLoading}
-            setIsLoading={setIsLoading}
+        {/* Left side - Image */}
+        <div className="hidden lg:block lg:w-1/2 relative">
+          <div className="absolute inset-0 bg-black/20" />{" "}
+          {/* Overlay for better text contrast */}
+          <img
+            src="/images/login-bg.jpg"
+            alt="Nature background"
+            className="w-full h-full object-cover"
           />
-        ) : (
-          <div className="space-y-4">
-            <Button
-              onClick={handleGoogleSignIn}
-              variant="destructive"
-              disabled={isLoading}
-              className="w-full"
-            >
-              {isLoading ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                "Sign in with Google"
-              )}
-            </Button>
-
-            <Button
-              onClick={() => setShowEmailSignIn(true)}
-              variant="outline"
-              disabled={isLoading}
-              className="w-full"
-            >
-              Sign in with Email
-            </Button>
+          <div className="absolute inset-0 flex items-center justify-center p-8">
+            <div className="text-white text-center">
+              <h2 className="text-4xl font-bold mb-4">Welcome Back</h2>
+              <p className="text-lg">Sign in to continue your journey</p>
+            </div>
           </div>
-        )}
+        </div>
+
+        {/* Right side - Login Form */}
+        <div className="w-full lg:w-1/2 flex items-center justify-center p-6">
+          <div className="w-full max-w-md space-y-6">
+            <div className="lg:hidden text-center mb-8">
+              <h1 className="text-2xl font-bold">Sign In</h1>
+            </div>
+            {showEmailSignIn ? (
+              <EmailSignIn
+                onBack={() => setShowEmailSignIn(false)}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+              />
+            ) : (
+              <div className="space-y-4">
+                <Button
+                  onClick={handleGoogleSignIn}
+                  variant="destructive"
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  {isLoading ? (
+                    <Loader2 className="animate-spin" />
+                  ) : (
+                    "Sign in with Google"
+                  )}
+                </Button>
+
+                <Button
+                  onClick={() => setShowEmailSignIn(true)}
+                  variant="outline"
+                  disabled={isLoading}
+                  className="w-full"
+                >
+                  Sign in with Email
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
       </Unauthenticated>
 
       <Authenticated>

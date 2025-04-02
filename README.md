@@ -156,7 +156,7 @@ turbo run build --filter web
 After deploying your convex app to prod, remember to update the `env` variables
 [Follow this Going-Live link for Convex](https://labs.convex.dev/auth/setup/manual)
 
-1. Generate the convex keys required. Navigate to the backend folder
+1. Generate the convex keys required. Navigate to the backend folder or [This link for Netlify](https://docs.convex.dev/production/hosting/netlify)
     ```bash
     cd packages/backend
     node generateKeys.mjs
